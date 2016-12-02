@@ -1,0 +1,16 @@
+#! python3
+# lookingBusy.py - script that will nudge the mouse every 10 seconds
+
+import pyautogui, time
+
+pyautogui.FAILSAFE = False
+
+try:
+    while True:
+        for i in range(10):
+            pyautogui.moveRel(100, 0, duration=.25)
+            pyautogui.moveRel(-100, 0, duration=.25)
+except KeyboardInterrupt:
+    exit
+    
+
