@@ -1,0 +1,25 @@
+#! python3
+
+import pyperclip, sys
+
+emails = {'access': 'You now have access to the folder. You will need to log out and log back in to gain access. Let me know of any issues',
+          'av': '''Our inventory scans report that the antivirus definitions are out of date. Please schedule a time with me today to get on your computer so I can investigate.''',
+          'iqms_update': 'Can I get on your computer and update IQMS? This is needed in addition to the update you ran. Let me know when. It will take 30-45 minutes.',
+          'customer_form': 'I’ve updated the customer form status sheet to include',
+          'let': 'Let me know when I can get on the computer and check this out',
+          'office': 'I need to uninstall the current version of Office on your computer and upgrade to 2010. This will take about 45 minutes and I will need to restart the computer so please save anything. Please let me know when I can do this.',
+          'finalterm': 'I’m scheduled to disable ’s mailbox. Is that okay if I proceed or do you still need to receive forwarding from email?',
+          'joinme': 'Can you start a join.me session? You can do this by going to https://join.me and clicking start a meeting. Download and run that, then tell me the 9 digit code.',
+          'Go': 'Let me know when I can go on your computer'}
+
+if len(sys.argv) < 2:
+    print("Enter more than one command")
+    sys.exit()
+
+template = sys.argv[1]
+
+if template in emails:
+    pyperclip.copy(emails[template])
+    print("Email copied")
+else:
+    print('no such email template exists')
