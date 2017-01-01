@@ -1,0 +1,28 @@
+#! python3
+# dailyWebcomic.py - checks websites for webcomic and downloads to desktop
+
+# it will need to run every day with task scheduler
+# download website and get latest comic if comic was updated
+
+import requests, bs4, time, os
+
+os.chdir('C:\\users\\eddie\\desktop')
+
+# testing it out for the first comic, which will be cyanide and happiness
+reCH = requests.get('http://explosm.net/comics/latest/')
+reCH.raise_for_status()
+soup = bs4.BeautifulSoup(reCH.text)
+
+# find comic image
+comicElem = soup.select('#main-comic')
+comicUrl = comicElem[0].get('src')
+resCH = requests.get('http:' + comicUrl)
+resCH.raise_for_status()
+
+# delete comic, download latest comic image
+if os.path.exists('C:\\users\\eddie\\desktop\\dailycomic.png'):
+	os.remove('.\\dailycomic.png')
+imageFile = open('dailycomic.png', 'wb')
+for chunk in resCH.iter_content(100000):
+     imageFile.write(chunk)
+imageFile.close()
